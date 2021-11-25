@@ -23,10 +23,14 @@ export const ProjectListScreen = () => {
 
     useEffect(() => {
         client('projects', {data: cleanObject(debouncedParam)}).then(setList)
+        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async response => {
+            if(response.ok){
+                setList(await response.json())
+            }
+        })
     }, [debouncedParam])
 
     useMount(() => {
-        client('users').then(setUsers)
         fetch(`${apiUrl}/users`).then(async response => {
             if(response.ok){
                 setUsers(await response.json())

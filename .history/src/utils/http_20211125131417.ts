@@ -9,7 +9,7 @@ interface Config extends RequestInit {
     data?: object
 }
 
-export const http = async (endpoint:string, {data, token, headers, ...customConfig}: Config= {}) => {
+export const http = async (endpoint:string, {data, token, headers, ...customConfig}: Config) => {
     const config = {
         method: 'GET',
         headers:{

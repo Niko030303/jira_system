@@ -26,7 +26,7 @@ export const ProjectListScreen = () => {
     }, [debouncedParam])
 
     useMount(() => {
-        client('users').then(setUsers)
+        client('users').then
         fetch(`${apiUrl}/users`).then(async response => {
             if(response.ok){
                 setUsers(await response.json())

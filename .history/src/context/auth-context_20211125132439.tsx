@@ -37,7 +37,7 @@ export const AuthProvider = ({children}: {children:ReactNode}) => {
     const logout = () => auth.logout().then(() => setUser(null))
 
     useMount(() => {
-        bootstrapUser().then(setUser)
+
     })
 
     return <AuthContext.Provider children={children} value={{user, login, register, logout}}/>

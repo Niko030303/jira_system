@@ -4,7 +4,6 @@ import { List } from "./list";
 import { useEffect, useState } from "react";
 import { cleanObject, useDebounce, useMount} from "../../utils";
 import * as qs from "qs";
-import { useHttp } from "../../utils/http";
 
 // 使用 JS 的同学，大部分的错误都是再 runtime（运行时）的时候发现的
 // 我们希望，在静态代码中，就能找到其中的一些错误 -> 强类型
@@ -22,11 +21,15 @@ export const ProjectListScreen = () => {
     const client = useHttp()
 
     useEffect(() => {
-        client('projects', {data: cleanObject(debouncedParam)}).then(setList)
+        client('projects', {data: cli})
+        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async response => {
+            if(response.ok){
+                setList(await response.json())
+            }
+        })
     }, [debouncedParam])
 
     useMount(() => {
-        client('users').then(setUsers)
         fetch(`${apiUrl}/users`).then(async response => {
             if(response.ok){
                 setUsers(await response.json())

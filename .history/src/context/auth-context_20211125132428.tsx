@@ -1,7 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import * as auth from '../auth-provider';
 import {User} from "../screens/project-list/search-panel"
-import { useMount } from "../utils";
 import { http } from "../utils/http";
 
 interface AuthForm {
@@ -36,9 +35,7 @@ export const AuthProvider = ({children}: {children:ReactNode}) => {
     const register = (form: AuthForm) => auth.register(form).then(setUser)
     const logout = () => auth.logout().then(() => setUser(null))
 
-    useMount(() => {
-        bootstrapUser().then(setUser)
-    })
+    use
 
     return <AuthContext.Provider children={children} value={{user, login, register, logout}}/>
 }
