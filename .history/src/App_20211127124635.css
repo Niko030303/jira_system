@@ -1,0 +1,5 @@
+html {
+  /* rem em */
+  em是相对于父元素;
+  font-size: 62.5%;
+}
